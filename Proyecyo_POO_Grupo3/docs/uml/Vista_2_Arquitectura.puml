@@ -1,0 +1,44 @@
+@startuml Vista_2_Arquitectura
+' Vista de servicios, repositorio, patrones, excepciones, util y app
+set separator none
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam nodesep 50
+skinparam ranksep 60
+skinparam class {
+  BackgroundColor #FDFDFD
+  BorderColor #555555
+}
+hide empty members
+!include ecocampus_cuerpo.iuml
+hide Identificable members
+hide Notificable members
+remove TipoPersona
+hide Persona members
+hide Estudiante members
+hide Colaborador members
+hide Operador members
+hide ResponsableSostenibilidad members
+hide MovimientoEcoPuntos members
+remove EstadoPunto
+remove TipoMaterial
+hide PuntoEcologico members
+remove TipoReporte
+remove Prioridad
+remove EstadoReporte
+hide ReporteResiduo members
+remove RegistroCambio
+remove EstadoRuta
+hide RutaRecoleccion members
+remove Parada
+remove UnidadMedida
+hide Recoleccion members
+remove DetalleRecoleccion
+remove EstadoCampania
+hide Campania members
+remove Actividad
+remove TipoEvento
+hide EventoSistema members
+remove @unlinked
+@enduml

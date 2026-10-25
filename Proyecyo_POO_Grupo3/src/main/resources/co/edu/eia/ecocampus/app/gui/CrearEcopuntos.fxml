@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.eia.ecocampus.app.gui.SceneController">
+   <children>
+      <Text layoutX="33.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creacion Ecopuntos" wrappingWidth="237.84222412109375">
+         <font>
+            <Font name="Cambria Math" size="33.0" />
+         </font>
+      </Text>
+      <Button layoutX="33.0" layoutY="343.0" mnemonicParsing="false" onAction="#volverMenuPrincipal" text="Menu Principal" />
+   </children>
+</AnchorPane>

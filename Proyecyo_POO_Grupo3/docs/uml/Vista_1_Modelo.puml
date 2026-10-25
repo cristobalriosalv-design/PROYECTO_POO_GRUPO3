@@ -1,0 +1,22 @@
+@startuml Vista_1_Modelo
+' Vista del paquete modelo (detalle del dominio)
+set separator none
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam nodesep 50
+skinparam ranksep 60
+skinparam class {
+  BackgroundColor #FDFDFD
+  BorderColor #555555
+}
+hide empty members
+!include ecocampus_cuerpo.iuml
+remove $excepcion
+remove $repositorio
+remove $patron
+remove $servicio
+remove $util
+remove $app
+remove $gui
+@enduml

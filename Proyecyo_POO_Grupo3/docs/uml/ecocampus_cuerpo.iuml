@@ -1,0 +1,820 @@
+' ============================================================
+'  EcoCampus Circular - clases y relaciones (coincide con src/main/java)
+'  Lo incluyen EcoCampus_Diagrama_Clases_Final.puml y las dos vistas.
+'  Visibilidad: + publico, - privado, # protegido, ~ paquete
+' ============================================================
+package "co.edu.eia.ecocampus.modelo" $modelo {
+
+  interface Identificable $modelo {
+    +getId(): String
+  }
+
+  interface Notificable $modelo {
+    +recibirNotificacion(evento: EventoSistema): void
+  }
+
+  enum TipoPersona $modelo {
+    ESTUDIANTE
+    COLABORADOR
+    OPERADOR
+    RESPONSABLE
+  }
+
+  abstract class Persona $modelo {
+    -id: String
+    -nombre: String
+    -correo: String
+    -saldoPuntos: int
+    -movimientos: List<MovimientoEcoPuntos>
+    -notificaciones: List<String>
+    #Persona(id: String, nombre: String, correo: String)
+    +getId(): String
+    +getNombre(): String
+    +setNombre(nombre: String): void
+    +getCorreo(): String
+    +setCorreo(correo: String): void
+    +getSaldoPuntos(): int
+    +agregarMovimiento(movimiento: MovimientoEcoPuntos): void
+    +getHistorial(): List<MovimientoEcoPuntos>
+    +recibirNotificacion(evento: EventoSistema): void
+    +getNotificaciones(): List<String>
+    +{abstract} getTipo(): TipoPersona
+    +{abstract} getFactorBonificacion(): double
+    +puedeParticiparEnCampanias(): boolean
+    +equals(otro: Object): boolean
+    +hashCode(): int
+    +toString(): String
+  }
+
+  class Estudiante $modelo {
+    -programa: String
+    -semestre: int
+    +Estudiante(id: String, nombre: String, correo: String)
+    +Estudiante(id: String, nombre: String, correo: String, programa: String, semestre: int)
+    +getPrograma(): String
+    +getSemestre(): int
+    +getTipo(): TipoPersona
+    +getFactorBonificacion(): double
+    +toString(): String
+  }
+
+  class Colaborador $modelo {
+    -dependencia: String
+    +Colaborador(id: String, nombre: String, correo: String)
+    +Colaborador(id: String, nombre: String, correo: String, dependencia: String)
+    +getDependencia(): String
+    +getTipo(): TipoPersona
+    +getFactorBonificacion(): double
+    +toString(): String
+  }
+
+  class Operador $modelo {
+    -disponible: boolean
+    -habilitadoResiduosEspeciales: boolean
+    +Operador(id: String, nombre: String, correo: String)
+    +Operador(id: String, nombre: String, correo: String, habilitadoResiduosEspeciales: boolean)
+    +isDisponible(): boolean
+    +cambiarDisponibilidad(disponible: boolean): void
+    +isHabilitadoResiduosEspeciales(): boolean
+    +setHabilitadoResiduosEspeciales(habilitado: boolean): void
+    +puedeAtender(tipo: TipoReporte): boolean
+    +getTipo(): TipoPersona
+    +getFactorBonificacion(): double
+    +toString(): String
+  }
+
+  class ResponsableSostenibilidad $modelo {
+    -area: String
+    +ResponsableSostenibilidad(id: String, nombre: String, correo: String)
+    +ResponsableSostenibilidad(id: String, nombre: String, correo: String, area: String)
+    +getArea(): String
+    +clasificarReporte(reporte: ReporteResiduo, prioridad: Prioridad): void
+    +cerrarCampania(campania: Campania): void
+    +getTipo(): TipoPersona
+    +getFactorBonificacion(): double
+    +puedeParticiparEnCampanias(): boolean
+    +toString(): String
+  }
+
+  class MovimientoEcoPuntos $modelo {
+    -id: String
+    -concepto: String
+    -puntos: int
+    -fecha: LocalDateTime
+    +MovimientoEcoPuntos(id: String, concepto: String, puntos: int)
+    +MovimientoEcoPuntos(id: String, concepto: String, puntos: int, fecha: LocalDateTime)
+    +getId(): String
+    +getConcepto(): String
+    +getPuntos(): int
+    +getFecha(): LocalDateTime
+    +toString(): String
+  }
+
+  enum EstadoPunto $modelo {
+    ACTIVO
+    INACTIVO
+    EN_MANTENIMIENTO
+  }
+
+  enum TipoMaterial $modelo {
+    ORGANICO
+    RECICLABLE
+    ESPECIAL
+    OTRO
+  }
+
+  class PuntoEcologico $modelo {
+    -codigo: String
+    -ubicacion: String
+    -capacidadKg: double
+    -estado: EstadoPunto
+    -categoriasAceptadas: Set<TipoMaterial>
+    +PuntoEcologico(codigo: String, ubicacion: String, capacidadKg: double)
+    +PuntoEcologico(codigo: String, ubicacion: String, capacidadKg: double, categorias: Set<TipoMaterial>)
+    +getId(): String
+    +getUbicacion(): String
+    +getCapacidadKg(): double
+    +getEstado(): EstadoPunto
+    +estaActivo(): boolean
+    +activar(): void
+    +desactivar(): void
+    +ponerEnMantenimiento(): void
+    +admite(material: TipoMaterial): boolean
+    +agregarCategoria(material: TipoMaterial): void
+    +getCategoriasAceptadas(): Set<TipoMaterial>
+    +toString(): String
+  }
+
+  enum TipoReporte $modelo {
+    DESBORDAMIENTO
+    CONTAMINACION
+    MATERIAL_ESPECIAL
+    OTRO
+    +requiereOperadorEspecial(): boolean
+  }
+
+  enum Prioridad $modelo {
+    BAJA
+    MEDIA
+    ALTA
+    CRITICA
+  }
+
+  enum EstadoReporte $modelo {
+    REGISTRADO
+    CLASIFICADO
+    ASIGNADO
+    EN_ATENCION
+    CERRADO
+    REABIERTO
+    +puedeCambiarA(destino: EstadoReporte): boolean
+    +esAbierto(): boolean
+  }
+
+  class ReporteResiduo $modelo {
+    -{static} FORMATO: DateTimeFormatter
+    -codigo: String
+    -fecha: LocalDateTime
+    -descripcion: String
+    -tipo: TipoReporte
+    -prioridad: Prioridad
+    -estado: EstadoReporte
+    -autor: Persona
+    -punto: PuntoEcologico
+    -operadorAsignado: Operador
+    -rutaAsignada: RutaRecoleccion
+    -recoleccion: Recoleccion
+    -historial: List<RegistroCambio>
+    +ReporteResiduo(codigo: String, autor: Persona, punto: PuntoEcologico, tipo: TipoReporte, descripcion: String)
+    +ReporteResiduo(codigo: String, autor: Persona, punto: PuntoEcologico, tipo: TipoReporte, descripcion: String, prioridad: Prioridad)
+    +clasificar(nuevaPrioridad: Prioridad): void
+    +asignar(operador: Operador): void
+    +asignarARuta(ruta: RutaRecoleccion): void
+    +iniciarAtencion(): void
+    +cerrar(recoleccionAsociada: Recoleccion): void
+    +reabrir(motivo: String): void
+    -verificarTransicion(nuevo: EstadoReporte): void
+    -validarOperador(operador: Operador): void
+    -cambiarEstado(nuevo: EstadoReporte, motivo: String): void
+    +estaAbierto(): boolean
+    +getId(): String
+    +getFecha(): LocalDateTime
+    +getDescripcion(): String
+    +getTipo(): TipoReporte
+    +getPrioridad(): Prioridad
+    +getEstado(): EstadoReporte
+    +getAutor(): Persona
+    +getPunto(): PuntoEcologico
+    +getOperadorAsignado(): Operador
+    +getRutaAsignada(): RutaRecoleccion
+    +getRecoleccion(): Recoleccion
+    +getHistorial(): List<RegistroCambio>
+    +toString(): String
+  }
+
+  class RegistroCambio <<clase interna de ReporteResiduo>> $modelo {
+    -estadoAnterior: EstadoReporte
+    -estadoNuevo: EstadoReporte
+    -fechaCambio: LocalDateTime
+    -motivo: String
+    -RegistroCambio(estadoAnterior: EstadoReporte, estadoNuevo: EstadoReporte, motivo: String)
+    +getEstadoAnterior(): EstadoReporte
+    +getEstadoNuevo(): EstadoReporte
+    +getFecha(): LocalDateTime
+    +getMotivo(): String
+    +toString(): String
+  }
+
+  enum EstadoRuta $modelo {
+    PLANIFICADA
+    EN_CURSO
+    CERRADA
+  }
+
+  class RutaRecoleccion $modelo {
+    -codigo: String
+    -nombre: String
+    -estado: EstadoRuta
+    -operador: Operador
+    -paradas: List<Parada>
+    -reportes: List<ReporteResiduo>
+    +RutaRecoleccion(codigo: String, nombre: String)
+    +agregarParada(punto: PuntoEcologico, accionEsperada: String): Parada
+    +quitarParada(orden: int): void
+    +asignarOperador(nuevoOperador: Operador): void
+    ~agregarReporte(reporte: ReporteResiduo): void
+    +iniciar(): void
+    +cerrar(): void
+    +contienePunto(punto: PuntoEcologico): boolean
+    -validarNoCerrada(): void
+    +getId(): String
+    +getNombre(): String
+    +getEstado(): EstadoRuta
+    +getOperador(): Operador
+    +getParadas(): List<Parada>
+    +getReportes(): List<ReporteResiduo>
+    +toString(): String
+  }
+
+  class Parada $modelo {
+    -orden: int
+    -punto: PuntoEcologico
+    -accionEsperada: String
+    -completada: boolean
+    ~Parada(orden: int, punto: PuntoEcologico, accionEsperada: String)
+    +marcarCompletada(): void
+    ~setOrden(orden: int): void
+    +getOrden(): int
+    +getPunto(): PuntoEcologico
+    +getAccionEsperada(): String
+    +isCompletada(): boolean
+    +toString(): String
+  }
+
+  enum UnidadMedida $modelo {
+    KG
+    GRAMO
+    LIBRA
+    -factorAKg: double
+    +aKg(cantidad: double): double
+    +getFactorAKg(): double
+  }
+
+  class Recoleccion $modelo {
+    -id: String
+    -fecha: LocalDateTime
+    -observaciones: String
+    -operador: Operador
+    -detalles: List<DetalleRecoleccion>
+    +Recoleccion(id: String, operador: Operador, observaciones: String)
+    +agregarDetalle(material: TipoMaterial, cantidad: double, unidad: UnidadMedida): void
+    +agregarDetalle(material: TipoMaterial, cantidadKg: double): void
+    +getPesoTotalKg(): double
+    +esValidaParaCierre(): boolean
+    +getId(): String
+    +getFecha(): LocalDateTime
+    +getObservaciones(): String
+    +getOperador(): Operador
+    +getDetalles(): List<DetalleRecoleccion>
+    +toString(): String
+  }
+
+  class DetalleRecoleccion $modelo {
+    -material: TipoMaterial
+    -cantidad: double
+    -unidad: UnidadMedida
+    +DetalleRecoleccion(material: TipoMaterial, cantidad: double, unidad: UnidadMedida)
+    +getMaterial(): TipoMaterial
+    +getCantidad(): double
+    +getUnidad(): UnidadMedida
+    +getPesoEnKg(): double
+    +toString(): String
+  }
+
+  enum EstadoCampania $modelo {
+    PLANIFICADA
+    ACTIVA
+    CERRADA
+  }
+
+  class Campania $modelo {
+    +{static} PUNTOS_POR_DEFECTO: int = 10
+    -codigo: String
+    -nombre: String
+    -descripcion: String
+    -fechaInicio: LocalDate
+    -fechaFin: LocalDate
+    -cupo: int
+    -puntosPorParticipacion: int
+    -estado: EstadoCampania
+    -participantes: Set<Persona>
+    -actividades: List<Actividad>
+    +Campania(codigo: String, nombre: String, fechaInicio: LocalDate, fechaFin: LocalDate, cupo: int)
+    +Campania(codigo: String, nombre: String, descripcion: String, fechaInicio: LocalDate, fechaFin: LocalDate, cupo: int, puntosPorParticipacion: int)
+    +agregarActividad(id: String, nombreActividad: String, fecha: LocalDateTime, cupoActividad: int): Actividad
+    +inscribir(persona: Persona): void
+    +retirar(persona: Persona): void
+    +activar(): void
+    +cerrar(): void
+    -validarNoCerrada(operacion: String): void
+    +tieneCupo(): boolean
+    +alcanzoCupo(): boolean
+    +tieneParticipantes(): boolean
+    +esParticipante(persona: Persona): boolean
+    +getId(): String
+    +getNombre(): String
+    +getDescripcion(): String
+    +getFechaInicio(): LocalDate
+    +getFechaFin(): LocalDate
+    +getCupo(): int
+    +getPuntosPorParticipacion(): int
+    +getEstado(): EstadoCampania
+    +getParticipantes(): Set<Persona>
+    +getActividades(): List<Actividad>
+    +toString(): String
+  }
+
+  class Actividad $modelo {
+    -id: String
+    -nombre: String
+    -fecha: LocalDateTime
+    -cupo: int
+    ~Actividad(id: String, nombre: String, fecha: LocalDateTime, cupo: int)
+    +getId(): String
+    +getNombre(): String
+    +getFecha(): LocalDateTime
+    +getCupo(): int
+    +toString(): String
+  }
+
+  enum TipoEvento $modelo {
+    CAMBIO_ESTADO_REPORTE
+    RUTA_CERRADA
+    CUPO_CAMPANIA_ALCANZADO
+  }
+
+  class EventoSistema $modelo {
+    -{static} FORMATO: DateTimeFormatter
+    -tipo: TipoEvento
+    -mensaje: String
+    -idOrigen: String
+    -fecha: LocalDateTime
+    +EventoSistema(tipo: TipoEvento, mensaje: String, idOrigen: String)
+    +getTipo(): TipoEvento
+    +getMensaje(): String
+    +getIdOrigen(): String
+    +getFecha(): LocalDateTime
+    +toString(): String
+  }
+}
+
+' ============================================================
+package "co.edu.eia.ecocampus.excepcion" $excepcion {
+  class EcoCampusException $excepcion {
+    +EcoCampusException(mensaje: String)
+    +EcoCampusException(mensaje: String, causa: Throwable)
+  }
+  class IdentificadorDuplicadoException $excepcion {
+    -id: String
+    +IdentificadorDuplicadoException(entidad: String, id: String)
+    +getId(): String
+  }
+  class TransicionInvalidaException $excepcion {
+    -origen: EstadoReporte
+    -destino: EstadoReporte
+    +TransicionInvalidaException(origen: EstadoReporte, destino: EstadoReporte)
+    +getOrigen(): EstadoReporte
+    +getDestino(): EstadoReporte
+  }
+  class OperacionNoPermitidaException $excepcion {
+    +OperacionNoPermitidaException(mensaje: String)
+  }
+  class RecursoNoEncontradoException $excepcion {
+    +RecursoNoEncontradoException(entidad: String, id: String)
+  }
+}
+
+' ============================================================
+package "co.edu.eia.ecocampus.repositorio" $repositorio {
+  class "RepositorioMemoria<T extends Identificable>" as RepositorioMemoria $repositorio {
+    -nombreEntidad: String
+    -elementos: Map<String, T>
+    +RepositorioMemoria(nombreEntidad: String)
+    +guardar(elemento: T): void
+    +buscarPorId(id: String): Optional<T>
+    +obtener(id: String): T
+    +eliminar(id: String): T
+    +existe(id: String): boolean
+    +listar(): List<T>
+    +filtrar(criterio: Predicate<? super T>): List<T>
+    +agregarTodos(otros: Collection<? extends T>): void
+    +tamanio(): int
+    +getNombreEntidad(): String
+  }
+}
+
+' ============================================================
+package "co.edu.eia.ecocampus.patron" $patron {
+
+  class ConfiguracionSistema <<Singleton>> $patron {
+    -{static} instancia: ConfiguracionSistema
+    -estrategiaPuntos: EstrategiaCalculoPuntos
+    -publicador: PublicadorEventos
+    -ConfiguracionSistema()
+    +{static} getInstancia(): ConfiguracionSistema
+    +getEstrategiaPuntos(): EstrategiaCalculoPuntos
+    +setEstrategiaPuntos(estrategia: EstrategiaCalculoPuntos): void
+    +getPublicador(): PublicadorEventos
+  }
+
+  class ReporteFactory <<Factory>> $patron {
+    +crearReporte(codigo: String, autor: Persona, punto: PuntoEcologico, tipo: TipoReporte, descripcion: String): ReporteResiduo
+    ~prioridadInicial(tipo: TipoReporte): Prioridad
+  }
+
+  class PersonaFactory <<Factory>> $patron {
+    +crearPersona(tipo: TipoPersona, id: String, nombre: String, correo: String): Persona
+  }
+
+  interface EstrategiaCalculoPuntos <<Strategy>> $patron {
+    +calcular(persona: Persona, detalles: List<? extends DetalleRecoleccion>): int
+    +getNombre(): String
+  }
+
+  class EstrategiaPorMaterial $patron {
+    -puntosPorKg: Map<TipoMaterial, Integer>
+    +EstrategiaPorMaterial()
+    +calcular(persona: Persona, detalles: List<? extends DetalleRecoleccion>): int
+    +getPuntosPorKg(material: TipoMaterial): int
+    +getNombre(): String
+  }
+
+  class EstrategiaPorPesoTotal $patron {
+    -puntosPorKg: int
+    +EstrategiaPorPesoTotal(puntosPorKg: int)
+    +calcular(persona: Persona, detalles: List<? extends DetalleRecoleccion>): int
+    +getNombre(): String
+  }
+
+  class EstrategiaBonificacionCampania $patron {
+    -base: EstrategiaCalculoPuntos
+    -campania: Campania
+    -multiplicador: double
+    +EstrategiaBonificacionCampania(base: EstrategiaCalculoPuntos, campania: Campania, multiplicador: double)
+    +calcular(persona: Persona, detalles: List<? extends DetalleRecoleccion>): int
+    +getNombre(): String
+  }
+
+  class PublicadorEventos <<Observer - Sujeto>> $patron {
+    -suscriptores: Map<TipoEvento, List<Notificable>>
+    -eventosPublicados: List<EventoSistema>
+    +PublicadorEventos()
+    +suscribir(tipo: TipoEvento, observador: Notificable): void
+    +desuscribir(tipo: TipoEvento, observador: Notificable): void
+    +publicar(evento: EventoSistema): void
+    +publicar(evento: EventoSistema, interesados: Collection<? extends Notificable>): void
+    +cantidadSuscriptores(tipo: TipoEvento): int
+    +getEventosPublicados(): List<EventoSistema>
+  }
+}
+
+' ============================================================
+package "co.edu.eia.ecocampus.servicio" $servicio {
+
+  class PersonaService $servicio {
+    -personas: RepositorioMemoria<Persona>
+    -fabrica: PersonaFactory
+    +PersonaService(personas: RepositorioMemoria<Persona>, fabrica: PersonaFactory)
+    +registrar(tipo: TipoPersona, id: String, nombre: String, correo: String): Persona
+    +<P extends Persona> registrar(persona: P): P
+    +buscar(id: String): Persona
+    +buscarOperador(id: String): Operador
+    +historial(id: String): List<MovimientoEcoPuntos>
+    +operadoresDisponibles(): List<Operador>
+    +listar(): List<Persona>
+  }
+
+  class PuntoEcologicoService $servicio {
+    -puntos: RepositorioMemoria<PuntoEcologico>
+    -reportes: RepositorioMemoria<ReporteResiduo>
+    +PuntoEcologicoService(puntos: RepositorioMemoria<PuntoEcologico>, reportes: RepositorioMemoria<ReporteResiduo>)
+    +registrar(punto: PuntoEcologico): void
+    +buscar(codigo: String): PuntoEcologico
+    +desactivar(codigo: String): void
+    +activar(codigo: String): void
+    +retirar(codigo: String): void
+    +listar(): List<PuntoEcologico>
+  }
+
+  class ReporteService $servicio {
+    -{static} POR_PRIORIDAD: Comparator<ReporteResiduo>
+    -reportes: RepositorioMemoria<ReporteResiduo>
+    -fabrica: ReporteFactory
+    -publicador: PublicadorEventos
+    -ecoPuntos: EcoPuntosService
+    +ReporteService(reportes: RepositorioMemoria<ReporteResiduo>, fabrica: ReporteFactory, publicador: PublicadorEventos, ecoPuntos: EcoPuntosService)
+    +crearReporte(codigo: String, autor: Persona, punto: PuntoEcologico, tipo: TipoReporte, descripcion: String): ReporteResiduo
+    +clasificar(codigo: String, prioridad: Prioridad): void
+    +asignarAOperador(codigo: String, operador: Operador): void
+    +asignarARuta(codigo: String, ruta: RutaRecoleccion): void
+    +iniciarAtencion(codigo: String): void
+    +cerrar(codigo: String, recoleccion: Recoleccion): int
+    +reabrir(codigo: String, motivo: String): void
+    +buscar(codigo: String): ReporteResiduo
+    +pendientesPorPrioridad(): List<ReporteResiduo>
+    +pendientesPorPunto(codigoPunto: String): List<ReporteResiduo>
+    +reportesDePersona(idPersona: String): List<ReporteResiduo>
+    +listar(): List<ReporteResiduo>
+    -notificarCambio(reporte: ReporteResiduo): void
+  }
+
+  class RutaService $servicio {
+    -rutas: RepositorioMemoria<RutaRecoleccion>
+    -publicador: PublicadorEventos
+    +RutaService(rutas: RepositorioMemoria<RutaRecoleccion>, publicador: PublicadorEventos)
+    +crearRuta(codigo: String, nombre: String): RutaRecoleccion
+    +buscar(codigo: String): RutaRecoleccion
+    +agregarParada(codigoRuta: String, punto: PuntoEcologico, accion: String): void
+    +asignarOperador(codigoRuta: String, operador: Operador): void
+    +iniciarRuta(codigoRuta: String): void
+    +cerrarRuta(codigoRuta: String): void
+    +listar(): List<RutaRecoleccion>
+  }
+
+  class CampaniaService $servicio {
+    -campanias: RepositorioMemoria<Campania>
+    -publicador: PublicadorEventos
+    -ecoPuntos: EcoPuntosService
+    +CampaniaService(campanias: RepositorioMemoria<Campania>, publicador: PublicadorEventos, ecoPuntos: EcoPuntosService)
+    +crearCampania(campania: Campania): void
+    +buscar(codigo: String): Campania
+    +agregarActividad(codigo: String, id: String, nombre: String, fecha: LocalDateTime, cupo: int): void
+    +activar(codigo: String): void
+    +inscribir(codigo: String, persona: Persona): void
+    +retirarParticipante(codigo: String, persona: Persona): void
+    +cerrar(codigo: String): int
+    +retirarCampania(codigo: String): void
+    +listar(): List<Campania>
+  }
+
+  class EcoPuntosService $servicio {
+    -configuracion: ConfiguracionSistema
+    -materialesAcumulados: Map<TipoMaterial, Double>
+    -consecutivoMovimientos: int
+    +EcoPuntosService(configuracion: ConfiguracionSistema)
+    +otorgarPorRecoleccion(persona: Persona, recoleccion: Recoleccion): int
+    +otorgarPorCampania(persona: Persona, campania: Campania): int
+    +canjear(persona: Persona, puntos: int, concepto: String): void
+    +sumarPuntos(movimientos: Collection<? extends MovimientoEcoPuntos>): int
+    +copiarDetalles(origen: List<? extends DetalleRecoleccion>, destino: List<? super DetalleRecoleccion>): void
+    +acumularMateriales(detalles: List<? extends DetalleRecoleccion>): void
+    +materialesRecolectados(): Map<TipoMaterial, Double>
+    +ranking(personas: Collection<? extends Persona>): List<Persona>
+    +getEstrategiaActual(): EstrategiaCalculoPuntos
+    +cambiarEstrategia(estrategia: EstrategiaCalculoPuntos): void
+    -siguienteId(): String
+  }
+
+  class ResumenService $servicio {
+    -{static} TOP_RANKING: int = 5
+    -personas: PersonaService
+    -puntos: PuntoEcologicoService
+    -reportes: ReporteService
+    -rutas: RutaService
+    -campanias: CampaniaService
+    -ecoPuntos: EcoPuntosService
+    +ResumenService(personas, puntos, reportes, rutas, campanias, ecoPuntos)
+    +generarResumen(): String
+  }
+}
+
+' ============================================================
+package "co.edu.eia.ecocampus.util" $util {
+  class ColeccionesUtil $util {
+    -ColeccionesUtil()
+    +{static} <T extends Identificable> buscarPorId(elementos: Collection<? extends T>, id: String): Optional<T>
+    +{static} <K, V extends Comparable<? super V>> ordenarPorValorDesc(mapa: Map<K, V>): List<Map.Entry<K, V>>
+  }
+  class Validador $util {
+    -{static} CORREO: Pattern
+    -Validador()
+    +{static} validarTexto(valor: String, campo: String): String
+    +{static} validarCorreo(correo: String): String
+    +{static} validarPositivo(valor: double, campo: String): double
+    +{static} validarPositivo(valor: int, campo: String): int
+  }
+}
+
+' ============================================================
+package "co.edu.eia.ecocampus.app" $app {
+  class Main $app {
+    +{static} main(args: String[]): void
+    -{static} registrarBitacora(publicador: PublicadorEventos): void
+  }
+  class ContextoAplicacion $app {
+    -configuracion: ConfiguracionSistema
+    -personas: PersonaService
+    -puntos: PuntoEcologicoService
+    -reportes: ReporteService
+    -rutas: RutaService
+    -campanias: CampaniaService
+    -ecoPuntos: EcoPuntosService
+    -resumen: ResumenService
+    +ContextoAplicacion(configuracion: ConfiguracionSistema)
+    +{static} crear(): ContextoAplicacion
+    +getPersonas(): PersonaService
+    +getPuntos(): PuntoEcologicoService
+    +getReportes(): ReporteService
+    +getRutas(): RutaService
+    +getCampanias(): CampaniaService
+    +getEcoPuntos(): EcoPuntosService
+    +getResumen(): ResumenService
+  }
+  interface AccionConsola <<FunctionalInterface>> $app {
+    +ejecutar(): void
+  }
+  class MenuConsola $app {
+    -ctx: ContextoAplicacion
+    -scanner: Scanner
+    +MenuConsola(ctx: ContextoAplicacion, scanner: Scanner)
+    +iniciar(): void
+    -menuPersonasYPuntos(): void
+    -menuReportes(): void
+    -menuRutas(): void
+    -menuCampanias(): void
+    -menuConsultas(): void
+    -menuEstrategia(): void
+    -ejecutar(accion: AccionConsola): void
+    -imprimirLista(titulo: String, elementos: Collection<?>): void
+    -<E extends Enum<E>> leerEnum(mensaje: String, tipo: Class<E>): E
+    -leerTexto(mensaje: String): String
+    -leerEntero(mensaje: String): int
+    -leerDecimal(mensaje: String): double
+    -leerFecha(mensaje: String): LocalDate
+    -leerSiNo(mensaje: String): boolean
+  }
+  class DatosDemo $app {
+    -DatosDemo()
+    +{static} cargar(ctx: ContextoAplicacion): void
+    +{static} demostrarCasosInvalidos(ctx: ContextoAplicacion): List<String>
+    -{static} intentar(resultados: List<String>, descripcion: String, accion: AccionConsola): void
+  }
+}
+
+package "co.edu.eia.ecocampus.app.gui" $gui {
+  class EcoCampusFX $gui {
+    +start(primaryStage: Stage): void
+  }
+  class LanzadorGui $gui {
+    +{static} main(args: String[]): void
+  }
+  class SceneController $gui {
+    +volverMenuPrincipal(event: ActionEvent): void
+    +switchToCrearEcopuntos(event: ActionEvent): void
+    -cambiarEscena(event: ActionEvent, fxml: String): void
+  }
+}
+
+' ===================== RELACIONES: modelo =====================
+Persona ..|> Identificable
+Persona ..|> Notificable
+PuntoEcologico ..|> Identificable
+ReporteResiduo ..|> Identificable
+RutaRecoleccion ..|> Identificable
+Campania ..|> Identificable
+MovimientoEcoPuntos ..|> Identificable
+
+Estudiante --|> Persona
+Colaborador --|> Persona
+Operador --|> Persona
+ResponsableSostenibilidad --|> Persona
+
+Persona "1" *--> "0..*" MovimientoEcoPuntos : acumula >
+Persona ..> TipoPersona : clasifica con >
+
+PuntoEcologico "0..*" --> "0..*" TipoMaterial : acepta >
+PuntoEcologico --> "1" EstadoPunto : tiene >
+
+ReporteResiduo "0..*" --> "1" Persona : creado por >
+ReporteResiduo "0..*" --> "1" PuntoEcologico : reporta sobre >
+ReporteResiduo "0..*" --> "0..1" Operador : asignado a >
+ReporteResiduo "0..*" <--> "0..1" RutaRecoleccion : atendido en >
+ReporteResiduo "1" --> "0..1" Recoleccion : cierre respaldado por >
+ReporteResiduo "1" *--> "0..*" RegistroCambio : historial de estados >
+ReporteResiduo ..> TipoReporte
+ReporteResiduo ..> Prioridad
+ReporteResiduo ..> EstadoReporte
+
+RutaRecoleccion "1" *--> "0..*" Parada : contiene en orden >
+RutaRecoleccion "0..*" --> "0..1" Operador : asignada a >
+Parada "0..*" --> "1" PuntoEcologico : visita >
+RutaRecoleccion ..> EstadoRuta
+
+Recoleccion "0..*" --> "1" Operador : realizada por >
+Recoleccion "1" *--> "0..*" DetalleRecoleccion : detalla >
+DetalleRecoleccion "0..*" --> "1" TipoMaterial : de material >
+DetalleRecoleccion ..> UnidadMedida
+
+Campania "1" *--> "0..*" Actividad : incluye >
+Campania "0..*" o--> "0..*" Persona : inscribe >
+Campania ..> EstadoCampania
+
+EventoSistema --> "1" TipoEvento : es de tipo >
+Notificable ..> EventoSistema : recibe >
+
+' ===================== RELACIONES: excepciones =====================
+IdentificadorDuplicadoException --|> EcoCampusException
+TransicionInvalidaException --|> EcoCampusException
+OperacionNoPermitidaException --|> EcoCampusException
+RecursoNoEncontradoException --|> EcoCampusException
+ReporteResiduo ..> TransicionInvalidaException : lanza >
+RepositorioMemoria ..> IdentificadorDuplicadoException : lanza >
+RepositorioMemoria ..> RecursoNoEncontradoException : lanza >
+RepositorioMemoria ..> Identificable : T extends >
+
+' ===================== RELACIONES: patrones =====================
+EstrategiaPorMaterial ..|> EstrategiaCalculoPuntos
+EstrategiaPorPesoTotal ..|> EstrategiaCalculoPuntos
+EstrategiaBonificacionCampania ..|> EstrategiaCalculoPuntos
+EstrategiaBonificacionCampania "0..*" --> "1" EstrategiaCalculoPuntos : envuelve >
+EstrategiaBonificacionCampania "0..*" --> "1" Campania : bonifica segun >
+ConfiguracionSistema "1" --> "1" EstrategiaCalculoPuntos : estrategia activa >
+ConfiguracionSistema "1" *--> "1" PublicadorEventos : centraliza >
+PublicadorEventos "1" o--> "0..*" Notificable : notifica a >
+PublicadorEventos ..> EventoSistema : publica >
+ReporteFactory ..> ReporteResiduo : crea >
+PersonaFactory ..> Persona : crea >
+
+' ===================== RELACIONES: servicios =====================
+PersonaService --> RepositorioMemoria : personas >
+PersonaService --> "1" PersonaFactory : usa >
+PuntoEcologicoService --> RepositorioMemoria : puntos y reportes >
+ReporteService --> RepositorioMemoria : reportes >
+ReporteService --> "1" ReporteFactory : usa >
+ReporteService --> "1" PublicadorEventos : publica en >
+ReporteService --> "1" EcoPuntosService : otorga puntos con >
+RutaService --> RepositorioMemoria : rutas >
+RutaService --> "1" PublicadorEventos : publica en >
+CampaniaService --> RepositorioMemoria : campanias >
+CampaniaService --> "1" PublicadorEventos : publica en >
+CampaniaService --> "1" EcoPuntosService : otorga puntos con >
+EcoPuntosService --> "1" ConfiguracionSistema : consulta >
+EcoPuntosService ..> MovimientoEcoPuntos : registra >
+ResumenService --> "1" ReporteService
+ResumenService --> "1" EcoPuntosService
+ResumenService ..> ColeccionesUtil
+
+' ===================== RELACIONES: app =====================
+ContextoAplicacion *--> "1" PersonaService
+ContextoAplicacion *--> "1" ReporteService
+ContextoAplicacion *--> "1" CampaniaService
+ContextoAplicacion *--> "1" RutaService
+ContextoAplicacion *--> "1" ResumenService
+ContextoAplicacion --> "1" ConfiguracionSistema : usa >
+Main ..> ContextoAplicacion : crea >
+Main ..> MenuConsola : inicia >
+Main ..> DatosDemo : carga >
+MenuConsola --> "1" ContextoAplicacion : opera sobre >
+MenuConsola ..> AccionConsola : ejecuta >
+DatosDemo ..> AccionConsola : ejecuta >
+LanzadorGui ..> EcoCampusFX : lanza >
+EcoCampusFX ..> SceneController : carga FXML con >
+
+note bottom of Main
+  Implementacion anonima (Observer):
+  Notificable bitacora = new Notificable() {
+     public void recibirNotificacion(EventoSistema e) {
+        System.out.println("[BITACORA] " + e);
+     }
+  };
+  suscrita a RUTA_CERRADA y CUPO_CAMPANIA_ALCANZADO
+end note
+
+note bottom of EstadoReporte
+  Transiciones validas:
+  REGISTRADO -> CLASIFICADO -> ASIGNADO
+  -> EN_ATENCION -> CERRADO -> REABIERTO
+  -> CLASIFICADO | ASIGNADO
+  CERRADO -> ASIGNADO lanza
+  TransicionInvalidaException
+end note

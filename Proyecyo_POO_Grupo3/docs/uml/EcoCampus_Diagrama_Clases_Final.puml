@@ -1,0 +1,15 @@
+@startuml EcoCampus_Diagrama_Clases_Final
+' Diagrama COMPLETO (entregable). El contenido vive en ecocampus_cuerpo.iuml
+set separator none
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam nodesep 50
+skinparam ranksep 60
+skinparam class {
+  BackgroundColor #FDFDFD
+  BorderColor #555555
+}
+hide empty members
+!include ecocampus_cuerpo.iuml
+@enduml
