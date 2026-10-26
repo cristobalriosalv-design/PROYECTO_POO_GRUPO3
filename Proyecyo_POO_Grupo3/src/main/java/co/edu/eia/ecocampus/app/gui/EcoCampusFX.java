@@ -17,8 +17,9 @@ public class EcoCampusFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("MainProyecto.fxml"));
-        
-        Image icon = new Image(getClass().getResourceAsStream("epiP.jpeg"));
+    	//Parent root = FXMLLoader.load(getClass().getResource("PersonasPuntos.fxml"));
+       
+    	Image icon = new Image(getClass().getResourceAsStream("epiP.jpeg"));
         
         primaryStage.getIcons().add(icon);
         primaryStage.setTitle("EcoCampus Circular");

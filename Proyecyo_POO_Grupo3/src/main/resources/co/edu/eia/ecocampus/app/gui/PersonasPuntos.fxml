@@ -78,6 +78,9 @@
                               <TableColumn fx:id="colCorreo" minWidth="6.4000244140625" prefWidth="178.4000244140625" text="Correo" />
                               <TableColumn fx:id="colPuntos" minWidth="1.5999755859375" prefWidth="181.5999755859375" text="Puntos" />
                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
                      </children>
                   </VBox>
@@ -112,7 +115,7 @@
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
                                     <CheckBox fx:id="chkOrganico" mnemonicParsing="false" text="Orgánico" />
-                                    <CheckBox fx:id="chkReciclable" mnemonicParsing="false" text="Recicable" />
+                                    <CheckBox fx:id="chkReciclable" mnemonicParsing="false" text="Reciclable" />
                                     <CheckBox fx:id="chkEspecial" mnemonicParsing="false" text="Especial" />
                                     <CheckBox fx:id="chkOtro" mnemonicParsing="false" text="Otro" />
                                  </children>
@@ -127,14 +130,17 @@
                               <Button mnemonicParsing="false" onAction="#retirarPunto" text="Retirar" />
                            </children>
                         </HBox>
-                        <TableView prefWidth="200.0">
+                        <TableView fx:id="tablaPuntos" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                           <columns>
-                            <TableColumn fx:id="colCodigo" prefWidth="75.0" text="Código" />
-                            <TableColumn fx:id="colUbicacion" prefWidth="75.0" text="Ubicación" />
-                              <TableColumn fx:id="colCapacidad" prefWidth="75.0" text="Capacidad" />
-                              <TableColumn fx:id="colEstado" prefWidth="75.0" text="Estado" />
-                              <TableColumn fx:id="colCategorias" prefWidth="75.0" text="Categorías" />
+                            <TableColumn fx:id="colCodigo" prefWidth="185.60003697872162" text="Código" />
+                            <TableColumn fx:id="colUbicacion" prefWidth="162.39996337890625" text="Ubicación" />
+                              <TableColumn fx:id="colCapacidad" prefWidth="178.4000244140625" text="Capacidad" />
+                              <TableColumn fx:id="colEstado" prefWidth="177.5999755859375" text="Estado" />
+                              <TableColumn fx:id="colCategorias" prefWidth="176.79998779296875" text="Categorías" />
                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
                      </children>
                   </VBox>
