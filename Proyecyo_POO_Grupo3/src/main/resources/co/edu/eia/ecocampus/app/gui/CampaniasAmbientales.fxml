@@ -14,53 +14,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" fx:controller="co.edu.eia.ecocampus.app.gui.CampaniasController">
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Crear campania">
-               <content>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <GridPane prefHeight="515.0" prefWidth="900.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <TextField GridPane.columnIndex="1" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo:" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descripcion:" GridPane.rowIndex="2" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de inicio (aaaa-mm-dd):" GridPane.rowIndex="3" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de fin (aaaa-mm-dd):" GridPane.rowIndex="4" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cupo:" GridPane.rowIndex="5" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Puntos por participacion:" GridPane.rowIndex="6" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmacion:" GridPane.rowIndex="7" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                           </children>
-                        </GridPane>
-                     </children>
-                  </VBox>
-               </content>
-            </Tab>
-          <Tab text="Agregar actividad">
+         <tabs>
+            <Tab text="Crear campania">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -76,20 +34,66 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <TextField GridPane.columnIndex="1" />
+                              <TextField GridPane.columnIndex="1" fx:id="txtCodigoCampania" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo:" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" GridPane.rowIndex="1" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtNombreCampania" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descripcion:" GridPane.rowIndex="2" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de inicio (aaaa-mm-dd):" GridPane.rowIndex="3" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de fin (aaaa-mm-dd):" GridPane.rowIndex="4" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cupo:" GridPane.rowIndex="5" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Puntos por participacion:" GridPane.rowIndex="6" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmacion:" GridPane.rowIndex="7" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="txtDescripcion" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="txtFechaInicio" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="txtFechaFin" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="txtCupo" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" fx:id="txtPuntos" />
+                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" fx:id="txtConfCrear" editable="false" wrapText="true" />
+                              <Button mnemonicParsing="false" onAction="#crearCampania" text="Crear campania" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text="Agregar actividad">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <GridPane prefHeight="515.0" prefWidth="900.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <TextField GridPane.columnIndex="1" fx:id="txtCampaniaActividad" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo de la campania:" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Id de la actividad:" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtIdActividad" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:" GridPane.rowIndex="2" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha (aaaa-mm-dd):" GridPane.rowIndex="3" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cupo:" GridPane.rowIndex="4" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmacion:" GridPane.rowIndex="5" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="txtNombreActividad" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="txtFechaActividad" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="txtCupoActividad" />
+                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="txtConfActividad" editable="false" wrapText="true" />
+                              <Button mnemonicParsing="false" onAction="#agregarActividad" text="Agregar actividad" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                            </children>
                         </GridPane>
                      </children>
@@ -97,66 +101,54 @@
                </content>
             </Tab>
             <Tab text="Activar campania">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <GridPane>
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
-              </content>
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <GridPane prefHeight="526.0" prefWidth="900.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo de la campania:" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmacion:" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" />
-                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField GridPane.columnIndex="1" fx:id="txtCampaniaActivar" />
+                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtConfActivar" editable="false" wrapText="true" />
+                              <Button mnemonicParsing="false" onAction="#activarCampania" text="Activar campania" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
-                     </children></VBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
-             <Tab text="Inscribir persona">
+            <Tab text="Inscribir persona">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <GridPane prefHeight="560.0" prefWidth="900.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo de la campania:" />
-                              <TextField GridPane.columnIndex="1" />
+                              <TextField GridPane.columnIndex="1" fx:id="txtCampaniaInscribir" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Id de la persona:" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtPersonaInscribir" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmacion:" GridPane.rowIndex="2" />
-                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="txtConfInscribir" editable="false" wrapText="true" />
+                              <Button mnemonicParsing="false" onAction="#inscribirPersona" text="Inscribir persona" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                      </children>
@@ -176,14 +168,16 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo de la campania:" />
-                              <TextField GridPane.columnIndex="1" />
+                              <TextField GridPane.columnIndex="1" fx:id="txtCampaniaRetirar" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Id de la persona:" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtPersonaRetirar" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmacion:" GridPane.rowIndex="2" />
-                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="txtConfRetirar" editable="false" wrapText="true" />
+                              <Button mnemonicParsing="false" onAction="#retirarParticipante" text="Retirar participante" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                      </children>
@@ -202,12 +196,14 @@
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo de la campania:" />
-                              <TextField GridPane.columnIndex="1" />
+                              <TextField GridPane.columnIndex="1" fx:id="txtCampaniaCerrar" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmacion:" GridPane.rowIndex="1" />
-                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtConfCerrar" editable="false" wrapText="true" />
+                              <Button mnemonicParsing="false" onAction="#cerrarCampania" text="Cerrar campania" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </children>
@@ -226,12 +222,14 @@
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo de la campania:" />
-                              <TextField GridPane.columnIndex="1" />
+                              <TextField GridPane.columnIndex="1" fx:id="txtCampaniaEliminar" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmacion:" GridPane.rowIndex="1" />
-                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtConfEliminar" editable="false" wrapText="true" />
+                              <Button mnemonicParsing="false" onAction="#retirarCampania" text="Retirar campania" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </children>
@@ -243,34 +241,34 @@
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <GridPane prefHeight="560.0" prefWidth="900.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
                            <children>
-                              <TextArea prefHeight="200.0" prefWidth="200.0" text="Campanias:" />
+                              <TextArea prefHeight="200.0" prefWidth="200.0" fx:id="txtListaCampanias" editable="false" wrapText="true" />
                            </children>
                         </GridPane>
                      </children>
                   </VBox>
                </content>
             </Tab>
-        </tabs>
+         </tabs>
       </TabPane>
    </center>
    <top>
       <VBox prefHeight="72.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
             <GridPane prefHeight="77.0" prefWidth="900.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Campanias ambientales">
                      <font>
@@ -280,7 +278,7 @@
                         <Insets left="20.0" />
                      </GridPane.margin>
                   </Text>
-                  <Button mnemonicParsing="false" text="Volver al menu" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                  <Button mnemonicParsing="false" text="Volver al menu" GridPane.columnIndex="1" GridPane.halignment="RIGHT" onAction="#volverMenu">
                      <GridPane.margin>
                         <Insets right="30.0" />
                      </GridPane.margin>

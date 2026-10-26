@@ -14,30 +14,30 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" fx:controller="co.edu.eia.ecocampus.app.gui.ConsultasController">
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Reportes pendientes por prioridad">
+         <tabs>
+            <Tab text="Reportes pendientes por prioridad">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <GridPane prefHeight="515.0" prefWidth="900.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
                            <children>
-                              <TextArea prefHeight="200.0" prefWidth="200.0" text="Reportes Pendientes Por Prioridad:" />
+                              <TextArea prefHeight="200.0" prefWidth="200.0" fx:id="txtPendientes" editable="false" wrapText="true" />
                            </children>
                         </GridPane>
                      </children>
                   </VBox>
                </content>
             </Tab>
-          <Tab text="Reportes pendientes de un punto">
+            <Tab text="Reportes pendientes de un punto">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -49,12 +49,14 @@
                            <rowConstraints>
                               <RowConstraints maxHeight="244.59998168945313" minHeight="10.0" prefHeight="102.99999084472657" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="395.8000091552734" minHeight="10.0" prefHeight="395.8000091552734" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <TextField GridPane.columnIndex="1" />
+                              <TextField GridPane.columnIndex="1" fx:id="txtCodigoPunto" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo del punto:" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reportes Pendientes:" GridPane.rowIndex="1" />
-                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtPendientesPunto" editable="false" wrapText="true" />
+                              <Button mnemonicParsing="false" onAction="#consultarPunto" text="Consultar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </children>
@@ -62,23 +64,6 @@
                </content>
             </Tab>
             <Tab text="Historial de una persona">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <GridPane>
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
-              </content>
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -90,22 +75,25 @@
                            <rowConstraints>
                               <RowConstraints maxHeight="244.59998168945313" minHeight="10.0" prefHeight="102.99999084472657" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="395.8000091552734" minHeight="10.0" prefHeight="395.8000091552734" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <TextField GridPane.columnIndex="1" />
+                              <TextField GridPane.columnIndex="1" fx:id="txtIdPersona" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Id de la persona:" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Historial:" GridPane.rowIndex="1" />
-                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="txtHistorial" editable="false" wrapText="true" />
+                              <Button mnemonicParsing="false" onAction="#consultarHistorial" text="Consultar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
-                     </children></VBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
-             <Tab text="Materiales recolectados">
+            <Tab text="Materiales recolectados">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <TextArea prefHeight="579.0" prefWidth="900.0" text="Materiales recolectados:" />
+                        <TextArea prefHeight="579.0" prefWidth="900.0" fx:id="txtMateriales" editable="false" wrapText="true" />
                      </children>
                   </VBox>
                </content>
@@ -114,25 +102,25 @@
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <TextArea prefHeight="579.0" prefWidth="900.0" text="Ranking de eco-puntos :" />
+                        <TextArea prefHeight="579.0" prefWidth="900.0" fx:id="txtRanking" editable="false" wrapText="true" />
                      </children>
                   </VBox>
                </content>
             </Tab>
-        </tabs>
+         </tabs>
       </TabPane>
    </center>
    <top>
       <VBox prefHeight="72.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
             <GridPane prefHeight="77.0" prefWidth="900.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Consultas">
                      <font>
@@ -142,7 +130,7 @@
                         <Insets left="20.0" />
                      </GridPane.margin>
                   </Text>
-                  <Button mnemonicParsing="false" text="Volver al menu" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                  <Button mnemonicParsing="false" text="Volver al menu" GridPane.columnIndex="1" GridPane.halignment="RIGHT" onAction="#volverMenu">
                      <GridPane.margin>
                         <Insets right="30.0" />
                      </GridPane.margin>

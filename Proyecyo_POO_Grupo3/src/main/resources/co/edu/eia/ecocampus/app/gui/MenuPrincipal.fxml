@@ -11,24 +11,24 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" fx:controller="co.edu.eia.ecocampus.app.gui.MenuPrincipalController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <GridPane prefHeight="425.0" prefWidth="600.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="38.599981689453124" minHeight="10.0" prefHeight="18.59997978210449" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="70.60001411437989" minHeight="10.0" prefHeight="68.20002021789551" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="91.599951171875" minHeight="5.999983215332037" prefHeight="51.199980163574224" vgrow="SOMETIMES" />
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="38.599981689453124" minHeight="10.0" prefHeight="18.59997978210449" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="70.60001411437989" minHeight="10.0" prefHeight="68.20002021789551" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="91.599951171875" minHeight="5.999983215332037" prefHeight="51.199980163574224" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="186.800016784668" minHeight="7.199999999999989" prefHeight="43.20001983642578" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="186.800016784668" minHeight="7.199999999999989" prefHeight="36.99998931884767" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="186.800016784668" minHeight="7.199999999999989" prefHeight="42.599993896484335" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="186.800016784668" minHeight="7.199999999999989" prefHeight="43.400000000000034" vgrow="SOMETIMES" />
-              </rowConstraints>
+               </rowConstraints>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Menu Principal" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ECO/CAMPUS" GridPane.rowIndex="1">
@@ -36,14 +36,14 @@
                         <Font name="Arial Black" size="49.0" />
                      </font>
                   </Text>
-                  <Button mnemonicParsing="false" text="Personas y puntos ecologicos" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" text="Reportes de residuos" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                  <Button mnemonicParsing="false" text="Rutas de recoleccion" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                  <Button mnemonicParsing="false" text="Campanias ambientales" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-                  <Button mnemonicParsing="false" text="Consultas" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" text="Estrategia de eco-puntos" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                  <Button mnemonicParsing="false" text="Resumen general" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                  <Button mnemonicParsing="false" text="Demostrar casos invalidos" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+                  <Button mnemonicParsing="false" text="Personas y puntos ecologicos" GridPane.halignment="CENTER" GridPane.rowIndex="3" onAction="#abrirPersonas" />
+                  <Button mnemonicParsing="false" text="Reportes de residuos" GridPane.halignment="CENTER" GridPane.rowIndex="4" onAction="#abrirReportes" />
+                  <Button mnemonicParsing="false" text="Rutas de recoleccion" GridPane.halignment="CENTER" GridPane.rowIndex="5" onAction="#abrirRutas" />
+                  <Button mnemonicParsing="false" text="Campanias ambientales" GridPane.halignment="CENTER" GridPane.rowIndex="6" onAction="#abrirCampanias" />
+                  <Button mnemonicParsing="false" text="Consultas" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" onAction="#abrirConsultas" />
+                  <Button mnemonicParsing="false" text="Estrategia de eco-puntos" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" onAction="#abrirEstrategia" />
+                  <Button mnemonicParsing="false" text="Resumen general" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" onAction="#abrirResumen" />
+                  <Button mnemonicParsing="false" text="Demostrar casos invalidos" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" onAction="#abrirCasosInvalidos" />
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <image>
                         <Image url="@Escuela-ingenieria-antioquia-branding-creamos.jpg" />
