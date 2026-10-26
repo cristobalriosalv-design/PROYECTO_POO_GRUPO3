@@ -1,8 +1,5 @@
 package co.edu.eia.ecocampus.app.gui;
 
-import java.io.IOException;
-import java.util.Optional;
-
 import co.edu.eia.ecocampus.excepcion.EcoCampusException;
 import co.edu.eia.ecocampus.modelo.Operador;
 import co.edu.eia.ecocampus.modelo.Persona;
@@ -16,18 +13,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 /** Controlador de PersonasPuntos.fxml: opciones 1 a 7 del submenu de consola. */
 public class PersonasPuntosController {
@@ -108,11 +98,11 @@ public class PersonasPuntosController {
             txtNombre.clear();
             txtCorreo.clear();
             chkHabilitado.setSelected(false);
-            mostrarInfo("Persona registrada", persona.toString());
+            Alertas.info("Persona registrada", persona.toString());
         } catch (EcoCampusException e) {
-            mostrarError("No se pudo registrar la persona", e.getMessage());
+            Alertas.error("No se pudo registrar la persona", e.getMessage());
         } catch (IllegalArgumentException e) {
-            mostrarError("Dato invalido", e.getMessage());
+            Alertas.error("Dato invalido", e.getMessage());
         }
     }
 
@@ -121,12 +111,12 @@ public class PersonasPuntosController {
     private void cambiarDisponibilidad() {
         Persona seleccionada = tablaPersonas.getSelectionModel().getSelectedItem();
         if (!(seleccionada instanceof Operador operador)) {
-            mostrarError("Seleccione un operador", "Elija en la tabla una persona de tipo OPERADOR.");
+            Alertas.error("Seleccione un operador", "Elija en la tabla una persona de tipo OPERADOR.");
             return;
         }
         operador.cambiarDisponibilidad(!operador.isDisponible());
         tablaPersonas.refresh();
-        mostrarInfo("Disponibilidad actualizada", operador.getNombre()
+        Alertas.info("Disponibilidad actualizada", operador.getNombre()
                 + (operador.isDisponible() ? " ahora esta disponible." : " ya no esta disponible."));
     }
 
@@ -153,13 +143,13 @@ public class PersonasPuntosController {
             txtCodigoPunto.clear();
             txtUbicacion.clear();
             txtCapacidad.clear();
-            mostrarInfo("Punto registrado", punto.toString());
+            Alertas.info("Punto registrado", punto.toString());
         } catch (NumberFormatException e) {
-            mostrarError("Dato invalido", "La capacidad debe ser un numero, por ejemplo 120 o 85.5");
+            Alertas.error("Dato invalido", "La capacidad debe ser un numero, por ejemplo 120 o 85.5");
         } catch (EcoCampusException e) {
-            mostrarError("No se pudo registrar el punto", e.getMessage());
+            Alertas.error("No se pudo registrar el punto", e.getMessage());
         } catch (IllegalArgumentException e) {
-            mostrarError("Dato invalido", e.getMessage());
+            Alertas.error("Dato invalido", e.getMessage());
         }
     }
 
@@ -174,7 +164,7 @@ public class PersonasPuntosController {
             puntos.activar(punto.getId());
             tablaPuntos.refresh();
         } catch (EcoCampusException e) {
-            mostrarError("No se pudo activar", e.getMessage());
+            Alertas.error("No se pudo activar", e.getMessage());
         }
     }
 
@@ -188,7 +178,7 @@ public class PersonasPuntosController {
             puntos.desactivar(punto.getId());
             tablaPuntos.refresh();
         } catch (EcoCampusException e) {
-            mostrarError("No se pudo desactivar", e.getMessage());
+            Alertas.error("No se pudo desactivar", e.getMessage());
         }
     }
 
@@ -199,31 +189,22 @@ public class PersonasPuntosController {
         if (punto == null) {
             return;
         }
-        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION,
-                "Se retirara el punto " + punto.getId() + ". Desea continuar?");
-        confirmacion.setHeaderText("Retirar punto ecologico");
-        Optional<ButtonType> respuesta = confirmacion.showAndWait();
-        if (respuesta.isEmpty() || respuesta.get() != ButtonType.OK) {
+        if (!Alertas.confirmar("Retirar punto ecologico",
+                "Se retirara el punto " + punto.getId() + ". Desea continuar?")) {
             return;
         }
         try {
             puntos.retirar(punto.getId());
             refrescarPuntos();
         } catch (EcoCampusException e) {
-            mostrarError("No se pudo retirar el punto", e.getMessage());
+            Alertas.error("No se pudo retirar el punto", e.getMessage());
         }
     }
 
     // ================================================ 0. Volver
     @FXML
     private void volverMenu(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("MenuPrincipal.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            mostrarError("No se pudo abrir el menu principal", e.getMessage());
-        }
+        Navegador.irA(event, "MenuPrincipal.fxml");
     }
 
     // ================================================ 6 y 7. Listar (tablas) y utilidades
@@ -238,7 +219,7 @@ public class PersonasPuntosController {
     private PuntoEcologico puntoSeleccionado() {
         PuntoEcologico punto = tablaPuntos.getSelectionModel().getSelectedItem();
         if (punto == null) {
-            mostrarError("Seleccione un punto", "Primero haga clic en un punto de la tabla.");
+            Alertas.error("Seleccione un punto", "Primero haga clic en un punto de la tabla.");
         }
         return punto;
     }
@@ -248,17 +229,5 @@ public class PersonasPuntosController {
             return "OPERADOR (" + (operador.isDisponible() ? "disponible" : "no disponible") + ")";
         }
         return persona.getTipo().toString();
-    }
-
-    private void mostrarInfo(String titulo, String mensaje) {
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION, mensaje);
-        alerta.setHeaderText(titulo);
-        alerta.showAndWait();
-    }
-
-    private void mostrarError(String titulo, String mensaje) {
-        Alert alerta = new Alert(Alert.AlertType.ERROR, mensaje);
-        alerta.setHeaderText(titulo);
-        alerta.showAndWait();
     }
 }
