@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -189,6 +191,29 @@
                           </rowConstraints>
                            <children>
                               <TextArea prefHeight="200.0" prefWidth="200.0" text="Rutas:" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text=".">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <GridPane prefHeight="560.0" prefWidth="900.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <ImageView fitHeight="500.0" fitWidth="902.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                                 <image>
+                                    <Image url="@Captura%20de%20pantalla%202026-10-25%20210545.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </GridPane>
                      </children>
