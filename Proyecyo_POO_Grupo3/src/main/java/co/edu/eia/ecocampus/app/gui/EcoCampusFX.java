@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -16,6 +17,10 @@ public class EcoCampusFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("MainProyecto.fxml"));
+        
+        Image icon = new Image(getClass().getResourceAsStream("epiP.jpeg"));
+        
+        primaryStage.getIcons().add(icon);
         primaryStage.setTitle("EcoCampus Circular");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
