@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.eia.ecocampus.app.gui.PersonasPuntosController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: aquamarine;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.eia.ecocampus.app.gui.PersonasPuntosController">
    <top>
       <Label prefHeight="66.0" prefWidth="372.0" text="Personas y Puntos Ecológicos" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
@@ -31,7 +31,7 @@
       </Label>
    </top>
    <center>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightblue;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
           <Tab text="Personas">
                <content>
@@ -127,7 +127,7 @@
                               <Button mnemonicParsing="false" onAction="#retirarPunto" text="Retirar" />
                            </children>
                         </HBox>
-                        <TableView prefHeight="200.0" prefWidth="200.0">
+                        <TableView prefWidth="200.0">
                           <columns>
                             <TableColumn fx:id="colCodigo" prefWidth="75.0" text="Código" />
                             <TableColumn fx:id="colUbicacion" prefWidth="75.0" text="Ubicación" />
