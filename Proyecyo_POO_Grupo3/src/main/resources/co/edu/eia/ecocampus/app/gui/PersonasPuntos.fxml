@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: aquamarine;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.eia.ecocampus.app.gui.PersonasPuntosController">
+   <top>
+      <Label prefHeight="66.0" prefWidth="372.0" text="Personas y Puntos Ecológicos" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightblue;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Personas">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <GridPane hgap="10.0" vgap="8.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Tipo" />
+                              <ComboBox fx:id="cbTipoPersona" prefWidth="150.0" GridPane.columnIndex="1" />
+                              <Label text="Id" GridPane.rowIndex="1" />
+                              <Label text="Nombre" GridPane.rowIndex="2" />
+                              <Label text="Correo" GridPane.rowIndex="3" />
+                              <TextField fx:id="txtIdPersona" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="txtCorreo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <CheckBox fx:id="chkHabilitado" mnemonicParsing="false" text="Habilitado residuos especiales" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                           </children>
+                        </GridPane>
+                        <HBox prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#registrarPersona" text="Registrar persona" textAlignment="CENTER" />
+                              <Button mnemonicParsing="false" onAction="#cambiarDisponibilidad" text="Cambiar disponibilidad" textAlignment="CENTER" />
+                           </children>
+                        </HBox>
+                        <TableView fx:id="tablaPersonas" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="colIdPersona" prefWidth="173.60003697872162" text="Id" />
+                            <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="173.60003662109375" text="Nombre" />
+                              <TableColumn fx:id="colTipo" prefWidth="184.7999267578125" text="Tipo" />
+                              <TableColumn fx:id="colCorreo" minWidth="6.4000244140625" prefWidth="178.4000244140625" text="Correo" />
+                              <TableColumn fx:id="colPuntos" minWidth="1.5999755859375" prefWidth="181.5999755859375" text="Puntos" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+          <Tab text="Puntos Ecológicos">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <GridPane hgap="10.0" vgap="8.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Código" />
+                              <Label text="Ubicación" GridPane.rowIndex="1" />
+                              <Label text="Capacidad (kg)" GridPane.rowIndex="2" />
+                              <Label text="Categorías" GridPane.rowIndex="3" />
+                              <TextField fx:id="txtCodigoPunto" GridPane.columnIndex="1" />
+                              <TextField fx:id="txtUbicacion" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="txtCapacidad" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <children>
+                                    <CheckBox fx:id="chkOrganico" mnemonicParsing="false" text="Orgánico" />
+                                    <CheckBox fx:id="chkReciclable" mnemonicParsing="false" text="Recicable" />
+                                    <CheckBox fx:id="chkEspecial" mnemonicParsing="false" text="Especial" />
+                                    <CheckBox fx:id="chkOtro" mnemonicParsing="false" text="Otro" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                        <HBox prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#registrarPunto" text="Registrar punto" />
+                              <Button mnemonicParsing="false" onAction="#activarPunto" text="Activar" />
+                              <Button mnemonicParsing="false" onAction="#desactivarPunto" text="Desactivar" />
+                              <Button mnemonicParsing="false" onAction="#retirarPunto" text="Retirar" />
+                           </children>
+                        </HBox>
+                        <TableView prefWidth="200.0">
+                          <columns>
+                            <TableColumn fx:id="colCodigo" prefWidth="75.0" text="Código" />
+                            <TableColumn fx:id="colUbicacion" prefWidth="75.0" text="Ubicación" />
+                              <TableColumn fx:id="colCapacidad" prefWidth="75.0" text="Capacidad" />
+                              <TableColumn fx:id="colEstado" prefWidth="75.0" text="Estado" />
+                              <TableColumn fx:id="colCategorias" prefWidth="75.0" text="Categorías" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <Button mnemonicParsing="false" onAction="#volverMenu" text="Volver al menú" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
+</BorderPane>
