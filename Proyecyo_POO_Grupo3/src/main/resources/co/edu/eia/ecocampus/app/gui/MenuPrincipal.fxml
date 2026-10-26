@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -17,5 +19,18 @@
             <Font name="Arial Black" size="35.0" />
          </font>
       </Text>
+      <Button layoutX="52.0" layoutY="135.0" mnemonicParsing="false" text="Personas y puntos ecologicos" />
+      <Button layoutX="299.0" layoutY="242.0" mnemonicParsing="false" text="Demostrar casos invalidos" />
+      <Button layoutX="299.0" layoutY="133.0" mnemonicParsing="false" text="Campanias ambientales" />
+      <Button layoutX="51.0" layoutY="170.0" mnemonicParsing="false" text="Reportes de residuos" />
+      <Button layoutX="51.0" layoutY="242.0" mnemonicParsing="false" text="Resumen general" />
+      <Button layoutX="52.0" layoutY="206.0" mnemonicParsing="false" text="Rutas de recoleccion" />
+      <Button layoutX="302.0" layoutY="207.0" mnemonicParsing="false" text="Estrategia de eco-puntos" />
+      <Button layoutX="302.0" layoutY="169.0" mnemonicParsing="false" text="Consultas" />
+      <ImageView fitHeight="100.0" fitWidth="200.0" layoutX="478.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Escuela-ingenieria-antioquia-branding-creamos.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
