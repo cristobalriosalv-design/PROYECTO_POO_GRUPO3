@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.eia.ecocampus.app.gui.ReportesController">
+   <top>
+      <Label text="Reportes de residuos" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <bottom>
+      <Button mnemonicParsing="false" onAction="#volverMenu" text="Volver al menú" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <TableView fx:id="tablaReportes" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="colCodigo" prefWidth="75.0" text="Código" />
+                <TableColumn fx:id="colTipo" prefWidth="75.0" text="Tipo" />
+                  <TableColumn fx:id="colPrioridad" prefWidth="75.0" text="Prioridad" />
+                  <TableColumn fx:id="colEstado" prefWidth="75.0" text="Estado" />
+                  <TableColumn fx:id="colPunto" prefWidth="75.0" text="Punto" />
+                  <TableColumn fx:id="colAutor" prefWidth="75.0" text="Autor" />
+                  <TableColumn fx:id="colOperador" prefWidth="75.0" text="Operador" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <Label text="Historial del reporte seleccionado" />
+            <ListView fx:id="listaHistorial" prefHeight="140.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </center>
+   <right>
+      <TabPane prefHeight="200.0" prefWidth="340.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Crear">
+               <content>
+                  <GridPane hgap="8.0" vgap="10.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <Label text="Código" />
+                        <Label text="Autor" GridPane.rowIndex="1" />
+                        <Label text="Punto" GridPane.rowIndex="2" />
+                        <Label text="Tipo" GridPane.rowIndex="3" />
+                        <Label text="Descripción" GridPane.rowIndex="4" />
+                        <TextField fx:id="txtCodigo" maxHeight="1.7976931348623157E308" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="cbAutor" maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="cbPunto" maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="cbTipo" maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="txtDescripcion" maxHeight="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Button mnemonicParsing="false" onAction="#crearReporte" text="Crear reporte" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                     </children>
+                  </GridPane>
+               </content>
+          </Tab>
+          <Tab text="Gestionar">
+               <content>
+                  <GridPane hgap="8.0" vgap="10.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <Label text="Seleccionado" />
+                        <Label fx:id="lblSeleccionado" text="ninguno" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="cbPrioridad" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Prioridad" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" onAction="#clasificarReporte" text="Clasificar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="cbOperador" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Operadores" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" onAction="#asignarOperador" text="Asignar operador" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="cbRuta" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Rutas" GridPane.rowIndex="3" />
+                        <Button mnemonicParsing="false" onAction="#asignarRuta" text="Asignar a ruta" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#iniciarAtencion" text="Iniciar atención" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <TextField fx:id="txtMotivo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Motivo" GridPane.rowIndex="5" />
+                        <Button mnemonicParsing="false" onAction="#reabrirReporte" text="Reabrir" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                     </children>
+                  </GridPane>
+               </content>
+          </Tab>
+            <Tab text="Cerrar">
+               <content>
+                  <GridPane hgap="8.0" vgap="10.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <children>
+                        <Label text="Id recolección" />
+                        <Label text="Observaciones" GridPane.rowIndex="1" />
+                        <Label text="Material" GridPane.rowIndex="2" />
+                        <Label text="Cantidad" GridPane.rowIndex="3" />
+                        <Label text="Unidad" GridPane.rowIndex="4" />
+                        <TextField fx:id="txtIdRecoleccion" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtObservaciones" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="cbMaterial" maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="txtCantidad" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="cbUnidad" maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Button mnemonicParsing="false" onAction="#agregarMaterial" text="Agregar material" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                        <ListView fx:id="listaDetalles" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+                        <Button mnemonicParsing="false" onAction="#cerrarReporte" text="Cerrar reporte" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                     </children>
+                  </GridPane>
+               </content>
+            </Tab>
+        </tabs>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </TabPane>
+   </right>
+</BorderPane>
