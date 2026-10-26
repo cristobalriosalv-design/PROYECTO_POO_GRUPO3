@@ -30,7 +30,7 @@
       </Label>
    </top>
    <bottom>
-      <Button mnemonicParsing="false" text="Volver al menú" BorderPane.alignment="CENTER">
+      <Button mnemonicParsing="false" onAction="#volverMenu" text="Volver al menú" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
@@ -121,7 +121,7 @@
                         <Label fx:id="lblSeleccionado" text="ninguno" GridPane.columnIndex="1" />
                         <ComboBox fx:id="cbPrioridad" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Prioridad" GridPane.rowIndex="1" />
                         <Button mnemonicParsing="false" onAction="#clasificarReporte" text="Clasificar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <ComboBox fx:id="cbPrioridad" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Operadores" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="cbOperador" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Operadores" GridPane.rowIndex="2" />
                         <Button mnemonicParsing="false" onAction="#asignarOperador" text="Asignar operador" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                         <ComboBox fx:id="cbRuta" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Rutas" GridPane.rowIndex="3" />
                         <Button mnemonicParsing="false" onAction="#asignarRuta" text="Asignar a ruta" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
@@ -164,7 +164,7 @@
                         <TextField fx:id="txtCantidad" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <ComboBox fx:id="cbUnidad" maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Button mnemonicParsing="false" onAction="#agregarMaterial" text="Agregar material" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-                        <ListView fx:id="listaDetalles" prefHeight="10.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+                        <ListView fx:id="listaDetalles" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="6" />
                         <Button mnemonicParsing="false" onAction="#cerrarReporte" text="Cerrar reporte" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
